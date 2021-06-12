@@ -1,0 +1,53 @@
+table:
+1.
+create table student(
+ID int(8),
+name varchar(20),
+major varchar(20),
+tutorID int(8),
+primary key(ID)
+);
+
+insert into student values(21181513,'zhao','cs',219567);
+insert into student values(30122222,'cao','math',309567);
+insert into student values(21181544,'zhou','cs',219567),(21181533,'hao','cs',219567);
+insert into student values(21181513,'zhao','cs','math',219567);
+ SELECT* FROM student;
+delete from student
+where major='math';
+
+2.
+create table class(
+stu_ID int(8),
+stu_name varchar(20),
+cla_name varchar(20),
+cla_ID int(8),
+score int(3)
+);
+
+
+operation:
+1)create index nam_index on student(name);
+
+explain select * from student where name = 'zhao';
+
+drop index nam_index on student;
+
+2)select * from student inner join class on ID = stu_ID where name = 'zhao';
+explain select * from student inner join class on ID = stu_ID where name = 'zhao';
+
+create index nam_index on student(name);
+create index stuID_index on student(ID);
+create index claID_index on class(stu_ID);
+
+drop index nam_index on student;
+drop index stuID_index on student;
+drop index claID_index on class;
+
+
+3)select * from (select * from student where major = 'cs') csstu where name = 'zhao';
+explain select * from (select * from student where major = 'cs') csstu where name = 'zhao';
+create index nam_index on student(name);
+create index maj_index on student(major);
+
+
